@@ -6,26 +6,11 @@ warnings.filterwarnings("ignore")
 
 uploaded_file = st.file_uploader("Choose a file")
 if uploaded_file is not None:
-    # To read file as bytes:
-    bytes_data = uploaded_file.getvalue()
-    # st.write(bytes_data)
-
-    # # To convert to a string based IO:
-    # stringio = StringIO(uploaded_file.getvalue().decode("utf-8"))
-    # st.write(stringio)
-
-    # # To read file as string:
-    # string_data = stringio.read()
-    # st.write(string_data)
-
-    # # Can be used wherever a "file-like" object is accepted:
-    # dataframe = pd.read_csv(uploaded_file)
-    # st.write(dataframe)
 
     from openpyxl import load_workbook
     from openpyxl.utils.cell import range_boundaries
 
-    wb = load_workbook(filename = '3GT - B-Shift 2025 Holiday Tracker.xlsx')
+    wb = load_workbook(uploaded_file)
     for st_name in wb.sheetnames:
         st = wb[st_name]
         mcr_coord_list = [mcr.coord for mcr in st.merged_cells.ranges]
@@ -63,12 +48,16 @@ if uploaded_file is not None:
     cols = ['PT 1', 'PT 2', 'PT 3', 'PT 4', 'PT 5', 'PT 6']
 
     employees=[]
+    
 
     for x in pd.unique(table[cols].values.ravel('K')):
-      if x is not None:
+      if x == x: # false for nan values
           employees.append(x)
 
-    import streamlit as st
+    employees.sort()
+    # for x in employees:
+    #    print(type(x))
+    # import streamlit as st
 
     # st.text(str(pd.unique(table[cols].values.ravel('K'))))
 

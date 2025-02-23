@@ -1,4 +1,4 @@
-# Wordle clone
+# Holiday tracker parser
 
 <p align="center">
 <a href="https://holidaytrackerparser-wxt3rtexydqutwudqc5dsx.streamlit.app/">
